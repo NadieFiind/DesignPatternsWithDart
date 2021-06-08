@@ -7,7 +7,8 @@ include: package:pedantic/analysis_options.1.11.0.yaml
 # Uncomment to specify additional rules.
 linter:
   rules:
-    - prefer_double_quotes
+    prefer_double_quotes: true
+    prefer_single_quotes: false
 
 analyzer:
 #   exclude:

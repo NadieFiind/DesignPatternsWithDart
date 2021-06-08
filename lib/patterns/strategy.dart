@@ -26,14 +26,14 @@ abstract class ShowInfoStrategy {
 
 class MinimalShowInfo implements ShowInfoStrategy {
 	@override
-  void showInfo(User user) {
+	void showInfo(User user) {
 		print("ID: ${user.id}\nName: ${user.name}");
 	}
 }
 
 class FancyShowInfo implements ShowInfoStrategy {
 	@override
-  void showInfo(User user) {
+	void showInfo(User user) {
 		print("----- {${user.id}} -----\n${user.name} : ${user.username}\n<<< ${user.email} >>>");
 	}
 }
