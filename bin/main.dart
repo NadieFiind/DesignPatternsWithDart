@@ -1,4 +1,4 @@
-import "package:DesignPatternsWithDart/main.dart";
+import "package:main/main.dart";
 
 void main(List<String> arguments) {
 	try {
@@ -7,5 +7,7 @@ void main(List<String> arguments) {
 		}
 	} on RangeError {
 		print("No arguments supplied.");
+	} finally {
+		HTTP.close();
 	}
 }
