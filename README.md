@@ -5,4 +5,10 @@ For my guide, I am following this [YouTube](https://youtube.com/playlist?list=PL
 I recommend you to check it out.
 
 ## Design Patterns
-* Strategy Pattern
+* [0] Strategy Pattern
+* [1] Observer Pattern
+
+## Running
+```bash
+dart run main [argument]
+```
