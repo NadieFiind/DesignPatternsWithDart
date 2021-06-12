@@ -45,11 +45,19 @@ Future<void> runStrategyPattern() async {
 		user.showInfo();
 		print("");
 	}
+	
+	HTTP.close();
 }
 
 Future<void> runObserverPattern() async {
-	final observer.ToDoList todo = observer.ToDoList("Observable To Do List");
-	final observer.ToDoListWatcher watcher = observer.ToDoListWatcher();
-	todo.register(watcher);
-	todo.completeItem(69);
+	final todo = observer.ToDoList("Observable To Do List");
+	final watcher1 = observer.ToDoListWatcher();
+	final watcher2 = observer.ToDoListWatcher();
+	
+	todo.register(watcher1);
+	todo.register(watcher2);
+	
+	await todo.completeItem(69);
+	
+	HTTP.close();
 }

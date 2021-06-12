@@ -68,16 +68,18 @@ class ToDoList extends Observable {
 		final data = await HTTP.get("https://jsonplaceholder.typicode.com/todos");
 		
 		for (Map itemData in data) {
-			final Item item = Item.fromJSON(itemData);
+			final item = Item.fromJSON(itemData);
 			if (item.id == id) return item;
 		}
+		
+		return null;
 	}
 	
 	Future<void> completeItem(int id) async {
-		final Item item = await getItem(id);
+		final item = await getItem(id);
 		item.completed = true;
 		
-		final data = await HTTP.put(
+		await HTTP.put(
 			"https://jsonplaceholder.typicode.com/todos",
 			body: item.toJSON()
 		);
@@ -87,6 +89,7 @@ class ToDoList extends Observable {
 }
 
 class ToDoListWatcher implements Observer<ToDoList> {
+	@override
 	void update(ToDoList observable, dynamic data) {
 		print("New changes on ${observable.name}:\nAn item has been completed: ${data.title}");
 	}

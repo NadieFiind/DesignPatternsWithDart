@@ -2,7 +2,7 @@ import "package:main/main.dart";
 
 void main(List<String> arguments) {
 	try {
-		final String arg = arguments[0];
+		final arg = arguments[0];
 		
 		if (arg == "0") {
 			runStrategyPattern();
@@ -11,7 +11,5 @@ void main(List<String> arguments) {
 		}
 	} on RangeError {
 		print("No argument supplied.");
-	} finally {
-		HTTP.close();
 	}
 }
