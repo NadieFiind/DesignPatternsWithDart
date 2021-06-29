@@ -34,12 +34,20 @@ Future<void> runStrategyPattern() async {
 	final data = await HTTP.get("https://jsonplaceholder.typicode.com/users");
 	
 	for (Map userData in data) {
-		strategy.User user;
+		var user;
 		
 		if (Random().nextBool()) {
 			user = strategy.User.fromJSON(userData);
 		} else {
-			user = strategy.FancyUser.fromJSON(userData);
+      user = strategy.FancyUser.fromJSON(userData);
+			
+      if (Random().nextBool()) {
+        user.isStillFancy = false;
+      }
+      
+      if (Random().nextBool()) {
+        user.isStillFancy = true;
+      }
 		}
 		
 		user.showInfo();
@@ -58,6 +66,11 @@ Future<void> runObserverPattern() async {
 	todo.register(watcher2);
 	
 	await todo.completeItem(69);
+	
+	HTTP.close();
+}
+
+Future<void> runDecoratorPattern() async {
 	
 	HTTP.close();
 }

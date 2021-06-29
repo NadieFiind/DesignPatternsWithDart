@@ -12,7 +12,7 @@ We could just instead assign the `User.showInfoStrategy`
 to have a different "strategy" for the `showInfo` method.
 
 The advantages of the strategy pattern over the purely inheritance approach, 
-is that we will avoid repetitive code in case there are two child classes
+is that we will avoid repetitive code in case there are two or more child classes
 of the `User` parent class that have an exactly the same `showInfo` method.
 That just duplicated the code and das not good.
 And the other cool thing about this is that we can change the value of the
@@ -59,7 +59,21 @@ class User {
 }
 
 class FancyUser extends User {
-	FancyUser.fromJSON(Map data) : super.fromJSON(data) {
+  bool _isStillFancy = true;
+  
+	FancyUser.fromJSON(Map data): super.fromJSON(data) {
 		showInfoStrategy = FancyShowInfo();
 	}
+  
+  set isStillFancy(bool value) {
+    if (!value && _isStillFancy) {
+      showInfoStrategy = MinimalShowInfo();
+      print("$name has decided to be a minimalist.");
+    } else if (value && !_isStillFancy) {
+      showInfoStrategy = FancyShowInfo();
+      print("$name has decided to be fancy again.");
+    }
+    
+    _isStillFancy = value;
+  }
 }

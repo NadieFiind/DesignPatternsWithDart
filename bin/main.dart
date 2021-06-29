@@ -8,6 +8,8 @@ void main(List<String> arguments) {
 			runStrategyPattern();
 		} else if (arg == "1") {
 			runObserverPattern();
+		} else if (arg == "2") {
+			runDecoratorPattern();
 		}
 	} on RangeError {
 		print("No argument supplied.");

@@ -26,7 +26,7 @@ class Observable {
 	}
 	
 	void _notify({dynamic data}) {
-		for (Observer observer in observers) {
+		for (var observer in observers) {
 			observer.update(this, data);
 		}
 	}
