@@ -5,6 +5,7 @@ import "package:http/http.dart" as http;
 // design patterns
 import "patterns/strategy.dart" as strategy;
 import "patterns/observer.dart" as observer;
+import "patterns/decorator.dart" as decorator;
 
 class HTTP {
 	static final http.Client _client = http.Client();
@@ -71,6 +72,29 @@ Future<void> runObserverPattern() async {
 }
 
 Future<void> runDecoratorPattern() async {
-	
+	final db = decorator.Database();
+	final logged_db = decorator.LoggedDatabase(decorator.Database());
+	final cached_db = decorator.CachedDatabase(decorator.Database());
+  final nice_db = decorator.CachedDatabase(
+    decorator.LoggedDatabase(decorator.Database())
+  );
+  
+  await db.get("users");
+  await db.set("users", {"name": "XD"});
+  
+  await logged_db.get("posts");
+  await logged_db.set("posts", {"title": "..."});
+  
+  print("");
+  
+  await cached_db.get("comments");
+  await cached_db.set("comments", {"name": "69"});
+  cached_db.printCache();
+  
+  print("");
+  
+  await nice_db.get("todos");
+  await nice_db.set("todos", {"completed": true});
+  
 	HTTP.close();
 }

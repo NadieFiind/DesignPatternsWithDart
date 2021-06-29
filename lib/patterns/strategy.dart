@@ -4,7 +4,6 @@
 Instead of defining the functionality of the `User.showInfo` method,
 it is instead delegating the functionality of the `showInfo` method of any
 implementations of the `ShowInfoStrategy` interface.
-
 So in case we want the child classes of the `User` to have a different
 functionality for the `showInfo` method,
 we would not need to override the `showInfo` method.

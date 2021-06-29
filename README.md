@@ -7,6 +7,7 @@ I recommend you to check it out.
 ## Design Patterns
 * [0] Strategy Pattern
 * [1] Observer Pattern
+* [2] Decorator Pattern
 
 ## Running
 ```bash
