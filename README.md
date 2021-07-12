@@ -5,9 +5,9 @@ For my guide, I am following this [YouTube](https://youtube.com/playlist?list=PL
 I recommend you to check it out.
 
 ## Design Patterns
-* [0] Strategy Pattern
-* [1] Observer Pattern
-* [2] Decorator Pattern
+* [0] [Strategy Pattern](lib/patterns/strategy.dart)
+* [1] [Observer Pattern](lib/patterns/observer.dart)
+* [2] [Decorator Pattern](lib/patterns/decorator.dart)
 
 ## Running
 ```bash
