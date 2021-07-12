@@ -2,15 +2,20 @@ import "package:main/main.dart";
 
 void main(List<String> arguments) {
 	try {
-		final arg = arguments[0];
-		
-		if (arg == "0") {
-			runStrategyPattern();
-		} else if (arg == "1") {
-			runObserverPattern();
-		} else if (arg == "2") {
-			runDecoratorPattern();
-		}
+		switch (int.parse(arguments[0])) {
+      case 0:
+        runStrategyPattern();
+        break;
+      case 1:
+        runObserverPattern();
+        break;
+      case 2:
+        runDecoratorPattern();
+        break;
+      case 3:
+        runFactoryPattern();
+        break;
+    }
 	} on RangeError {
 		print("No argument supplied.");
 	}

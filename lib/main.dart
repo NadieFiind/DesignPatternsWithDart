@@ -6,6 +6,7 @@ import "package:http/http.dart" as http;
 import "patterns/strategy.dart" as strategy;
 import "patterns/observer.dart" as observer;
 import "patterns/decorator.dart" as decorator;
+import "patterns/factory.dart" as factory_;
 
 class HTTP {
 	static final http.Client _client = http.Client();
@@ -96,5 +97,22 @@ Future<void> runDecoratorPattern() async {
   await nice_db.get("todos");
   await nice_db.set("todos", {"completed": true});
   
+	HTTP.close();
+}
+
+Future<void> runFactoryPattern() async {
+  final data = await HTTP.get("https://jsonplaceholder.typicode.com/users");
+	final userFactory = factory_.UserFactory(5, 5);
+  
+	for (Map userData in data) {
+		final user = userFactory.fromJSON(userData);
+    
+    if (user is factory_.VowelUser) {
+      print("A new vowel user has been constructed. (${user.username})");
+    } else {
+      print("A new consonant user has been constructed. (${user.username})");
+    }
+	}
+	
 	HTTP.close();
 }
