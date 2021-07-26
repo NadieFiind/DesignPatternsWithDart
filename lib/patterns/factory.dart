@@ -30,22 +30,22 @@ class UserFactory {
     consonantUsers++;
     if (consonantUsers >= consonantUserLimit) throw "Consonant Users Exceeded";
     return ConsonantUser.fromJSON(data);
-	}
+  }
   
   static bool _isVowel(String char) => "aeiouAEIOU".contains(char);
 }
 
 abstract class User {
-	int id;
-	String name;
-	String username;
-	String email;
-	
+  int id;
+  String name;
+  String username;
+  String email;
+  
   User.fromJSON(Map data) {
     id = data["id"];
-		name = data["name"];
-		username = data["username"];
-		email = data["email"];
+    name = data["name"];
+    username = data["username"];
+    email = data["email"];
   }
 }
 

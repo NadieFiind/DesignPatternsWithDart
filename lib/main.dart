@@ -7,42 +7,43 @@ import "patterns/strategy.dart" as strategy;
 import "patterns/observer.dart" as observer;
 import "patterns/decorator.dart" as decorator;
 import "patterns/factory.dart" as factory_;
+import "patterns/singleton.dart" as singleton;
 
 class HTTP {
-	static final http.Client _client = http.Client();
-	
-	static Future get(String url) async {
-		final uri = Uri.parse(url);
-		final response = await _client.get(uri);
-		return json.decode(response.body);
-	}
-	
-	static Future put(String url, {Map body}) async {
-		final response = await _client.put(
-			Uri.parse(url),
-			headers: {"Content-type": "application/json; charset=UTF-8"},
-			body: json.encode(body)
-		);
-		
-		return json.decode(response.body);
-	}
-	
-	static void close() {
-		_client.close();
-	}
+  static final http.Client _client = http.Client();
+  
+  static Future get(String url) async {
+    final uri = Uri.parse(url);
+    final response = await _client.get(uri);
+    return json.decode(response.body);
+  }
+  
+  static Future put(String url, {Map body}) async {
+    final response = await _client.put(
+      Uri.parse(url),
+      headers: {"Content-type": "application/json; charset=UTF-8"},
+      body: json.encode(body)
+    );
+    
+    return json.decode(response.body);
+  }
+  
+  static void close() {
+    _client.close();
+  }
 }
 
 Future<void> runStrategyPattern() async {
-	final data = await HTTP.get("https://jsonplaceholder.typicode.com/users");
-	
-	for (Map userData in data) {
-		var user;
-		
-		if (Random().nextBool()) {
-			user = strategy.User.fromJSON(userData);
-		} else {
+  final data = await HTTP.get("https://jsonplaceholder.typicode.com/users");
+  
+  for (Map userData in data) {
+    var user;
+    
+    if (Random().nextBool()) {
+      user = strategy.User.fromJSON(userData);
+    } else {
       user = strategy.FancyUser.fromJSON(userData);
-			
+      
       if (Random().nextBool()) {
         user.isStillFancy = false;
       }
@@ -50,32 +51,32 @@ Future<void> runStrategyPattern() async {
       if (Random().nextBool()) {
         user.isStillFancy = true;
       }
-		}
-		
-		user.showInfo();
-		print("");
-	}
-	
-	HTTP.close();
+    }
+    
+    user.showInfo();
+    print("");
+  }
+  
+  HTTP.close();
 }
 
 Future<void> runObserverPattern() async {
-	final todo = observer.ToDoList("Observable To Do List");
-	final watcher1 = observer.ToDoListWatcher();
-	final watcher2 = observer.ToDoListWatcher();
-	
-	todo.register(watcher1);
-	todo.register(watcher2);
-	
-	await todo.completeItem(69);
-	
-	HTTP.close();
+  final todo = observer.ToDoList("Observable To Do List");
+  final watcher1 = observer.ToDoListWatcher();
+  final watcher2 = observer.ToDoListWatcher();
+  
+  todo.register(watcher1);
+  todo.register(watcher2);
+  
+  await todo.completeItem(69);
+  
+  HTTP.close();
 }
 
 Future<void> runDecoratorPattern() async {
-	final db = decorator.Database();
-	final logged_db = decorator.LoggedDatabase(decorator.Database());
-	final cached_db = decorator.CachedDatabase(decorator.Database());
+  final db = decorator.Database();
+  final logged_db = decorator.LoggedDatabase(decorator.Database());
+  final cached_db = decorator.CachedDatabase(decorator.Database());
   final nice_db = decorator.CachedDatabase(
     decorator.LoggedDatabase(decorator.Database())
   );
@@ -97,22 +98,28 @@ Future<void> runDecoratorPattern() async {
   await nice_db.get("todos");
   await nice_db.set("todos", {"completed": true});
   
-	HTTP.close();
+  HTTP.close();
 }
 
 Future<void> runFactoryPattern() async {
   final data = await HTTP.get("https://jsonplaceholder.typicode.com/users");
-	final userFactory = factory_.UserFactory(5, 5);
+  final userFactory = factory_.UserFactory(5, 5);
   
-	for (Map userData in data) {
-		final user = userFactory.fromJSON(userData);
+  for (Map userData in data) {
+    final user = userFactory.fromJSON(userData);
     
     if (user is factory_.VowelUser) {
       print("A new vowel user has been constructed. (${user.username})");
     } else {
       print("A new consonant user has been constructed. (${user.username})");
     }
-	}
-	
-	HTTP.close();
+  }
+  
+  HTTP.close();
+}
+
+Future<void> runSingletonPattern() async {
+  final user = await singleton.Database.instance.getUser(1);
+  print(user);
+  HTTP.close();
 }

@@ -20,49 +20,49 @@ the classes while the program is still running.
 */
 
 abstract class ShowInfoStrategy {
-	void showInfo(User user);
+  void showInfo(User user);
 }
 
 class MinimalShowInfo implements ShowInfoStrategy {
-	@override
-	void showInfo(User user) {
-		print("ID: ${user.id}\nName: ${user.name}");
-	}
+  @override
+  void showInfo(User user) {
+    print("ID: ${user.id}\nName: ${user.name}");
+  }
 }
 
 class FancyShowInfo implements ShowInfoStrategy {
-	@override
-	void showInfo(User user) {
-		print("----- {${user.id}} -----\n${user.name} : ${user.username}\n<<< ${user.email} >>>");
-	}
+  @override
+  void showInfo(User user) {
+    print("----- {${user.id}} -----\n${user.name} : ${user.username}\n<<< ${user.email} >>>");
+  }
 }
 
 class User {
-	int id;
-	String name;
-	String username;
-	String email;
-	ShowInfoStrategy showInfoStrategy;
-	
-	User.fromJSON(Map data) {
-		id = data["id"];
-		name = data["name"];
-		username = data["username"];
-		email = data["email"];
-		showInfoStrategy = MinimalShowInfo();
-	}
-	
-	void showInfo() {
-		showInfoStrategy.showInfo(this);
-	}
+  int id;
+  String name;
+  String username;
+  String email;
+  ShowInfoStrategy showInfoStrategy;
+  
+  User.fromJSON(Map data) {
+    id = data["id"];
+    name = data["name"];
+    username = data["username"];
+    email = data["email"];
+    showInfoStrategy = MinimalShowInfo();
+  }
+  
+  void showInfo() {
+    showInfoStrategy.showInfo(this);
+  }
 }
 
 class FancyUser extends User {
   bool _isStillFancy = true;
   
-	FancyUser.fromJSON(Map data): super.fromJSON(data) {
-		showInfoStrategy = FancyShowInfo();
-	}
+  FancyUser.fromJSON(Map data): super.fromJSON(data) {
+    showInfoStrategy = FancyShowInfo();
+  }
   
   set isStillFancy(bool value) {
     if (!value && _isStillFancy) {

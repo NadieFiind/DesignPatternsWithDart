@@ -9,6 +9,7 @@ I recommend you to check it out.
 * [1] [Observer Pattern](lib/patterns/observer.dart)
 * [2] [Decorator Pattern](lib/patterns/decorator.dart)
 * [3] [Factory Pattern](lib/patterns/factory.dart)
+* [4] [Singleton Pattern](lib/patterns/singleton.dart)
 
 ## Running
 ```bash
