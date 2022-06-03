@@ -1,4 +1,4 @@
-# Design Patterns With Dart
+# DesignPatternsWithDart
 > Implementing different software design patterns with Dart for learning purposes.
 
 For my guide, I am following this [YouTube](https://youtube.com/playlist?list=PLrhzvIcii6GNjpARdnO4ueTUAVR9eMBpc) tutorial playlist.
@@ -11,7 +11,7 @@ I recommend you to check it out.
 * [3] [Factory Pattern](lib/patterns/factory.dart)
 * [4] [Singleton Pattern](lib/patterns/singleton.dart)
 
-## Running
+## How To Run
 ```bash
-dart run main [argument]
+dart run main [design pattern number]
 ```
